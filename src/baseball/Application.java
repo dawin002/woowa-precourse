@@ -4,8 +4,10 @@ import baseball.domain.Judgement;
 import baseball.domain.NumberGenerator;
 import baseball.domain.Referee;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * 객체 지향 프로그래밍
@@ -18,8 +20,28 @@ import java.util.List;
  */
 public class Application {
     public static void main(String[] args) {
+        NumberGenerator generator = new NumberGenerator();
+        List<Integer> computer = generator.createRandomNumbers();
+
         Referee referee = new Referee();
-        String result = referee.compare(Arrays.asList(1, 2, 3), Arrays.asList(1, 2, 3));
-        System.out.println(result);
+
+        String result = "";
+        while (!result.equals("0볼 3스트라이크")) {
+            result = referee.compare(computer, askNumbers());
+            System.out.println(result);
+        }
+        System.out.println("3개의 숫자를 모두 맞혔습니다! 게임 종료");
+    }
+
+    public static List<Integer> askNumbers() {
+        System.out.print("숫자를 입력해 주세요 : ");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.next();
+
+        List<Integer> numbers = new ArrayList<>();
+        for (String number : input.split("")) {
+            numbers.add(Integer.valueOf(number));
+        }
+        return numbers;
     }
 }
