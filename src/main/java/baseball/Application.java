@@ -1,11 +1,9 @@
 package baseball;
 
-import baseball.domain.Judgement;
 import baseball.domain.NumberGenerator;
 import baseball.domain.Referee;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
