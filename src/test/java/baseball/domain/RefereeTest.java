@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Arrays;
 import java.util.List;
 
-
 class RefereeTest {
 
     private Referee referee;
