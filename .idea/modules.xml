@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/basaball-mento.iml" filepath="$PROJECT_DIR$/basaball-mento.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basaball-mentor.iml" filepath="$PROJECT_DIR$/basaball-mentor.iml" />
     </modules>
   </component>
 </project>
