@@ -5,8 +5,7 @@ import java.util.List;
 public class Judgement {
     public int correctCount(List<Integer> computer, List<Integer> player) {
         int result = 0;
-        for (int i = 0; i < player.size(); i++) {
-            int playerNumber = player.get(i);
+        for (int playerNumber : player) {
             if (computer.contains(playerNumber)) {
                 result++;
             }
