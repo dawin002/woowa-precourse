@@ -18,6 +18,12 @@ public class EventPlaner {
     public void run() {
         Date date = initDate();
         Orders orders = initOrders();
+        printTotalPrice(orders);
+    }
+
+    private void printTotalPrice(Orders orders) {
+        int totalPrice = orders.getTotalPrice();
+        System.out.println(totalPrice);
     }
 
     private Date initDate() {
