@@ -1,21 +1,23 @@
 package christmas.controller;
 
 import christmas.model.Date;
+import christmas.model.OrdersGenerator;
+import christmas.model.Orders;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class EventPlaner {
-    OutputView outputView;
-    InputView inputView;
-    Date date;
+    private OutputView outputView;
+    private InputView inputView;
+
     public EventPlaner(OutputView outputView, InputView inputView) {
-        this.date = initDate();
         this.outputView = outputView;
         this.inputView = inputView;
     }
 
     public void run() {
-
+        Date date = initDate();
+        Orders orders = initOrders();
     }
 
     private Date initDate() {
@@ -26,5 +28,16 @@ public class EventPlaner {
             outputView.printError(e.getMessage());
         }
         return initDate();
+    }
+
+    private Orders initOrders() {
+        try {
+            outputView.printReadOrder();
+            OrdersGenerator generator = new OrdersGenerator(inputView.readOrder());
+            return new Orders(generator.getOrders());
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+        }
+        return initOrders();
     }
 }
