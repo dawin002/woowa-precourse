@@ -38,5 +38,9 @@ public class Order {
     public int getPrice() {
         return this.price;
     }
+
+    public int getTotalPrice() {
+        return this.quantity * this.price;
+    }
 }
 
