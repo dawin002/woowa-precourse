@@ -22,5 +22,21 @@ public class Order {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public int getQuantity() {
+        return this.quantity;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
 }
 
