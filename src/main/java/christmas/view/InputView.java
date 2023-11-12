@@ -7,6 +7,7 @@ import java.util.List;
 
 public class InputView {
     private InputValidator validator;
+
     public InputView(InputValidator validator) {
         this.validator = validator;
     }
@@ -19,37 +20,42 @@ public class InputView {
 
     public List<String> readOrder() {
         String input = Console.readLine();
-        String[] split = input.split(",");
-        List<String> order = List.of(split);
-        validateInputOrder(order);
-        return order;
+        List<String> orders = makeInputToList(input);
+        for (String order : orders) {
+            validateInputOrder(order);
+        }
+        return orders;
+    }
+
+    private List<String> makeInputToList(String input) {
+        String[] splitInput = input.split(",");
+        return List.of(splitInput);
     }
 
     private void validateInputDate(String input) {
-        try {
-            validator.validateIsBlank(input);
-            validator.validateIsNumber(input);
-        } catch (IllegalArgumentException e) {
+        if (validator.isBlank(input)
+                || validator.isNotNumber(input)) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }
 
-    private void validateInputOrder(List<String> orders) {
-        try {
-            for (String menu : orders) {
-                validator.validateIsBlank(menu);
-                String[] splitOrder = menu.split("-");
-                validateInputMenu(splitOrder[0], splitOrder[1]);
-            }
-        } catch (IllegalArgumentException e) {
+    private void validateInputOrder(String order) {
+        if (validator.isBlank(order)
+                || validator.isNotContains(order, "-")
+                || validator.isBlank(getMenuName(order))
+                || validator.isBlank(getMenuQuantity(order))
+                || validator.isNotNumber(getMenuQuantity(order))) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
-    private void validateInputMenu(String name, String number) {
-        validator.validateIsBlank(name);
-        validator.validateIsBlank(number);
-        validator.validateIsNumber(number);
+    private String getMenuName(String order) {
+        String[] splitOrder = order.split("-");
+        return splitOrder[0];
     }
 
+    private String getMenuQuantity(String order) {
+        String[] splitOrder = order.split("-");
+        return splitOrder[1];
+    }
 }

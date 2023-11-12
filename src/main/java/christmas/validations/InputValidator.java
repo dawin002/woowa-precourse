@@ -18,4 +18,8 @@ public class InputValidator {
         }
         return false;
     }
+
+    public boolean isNotContains(String input, String containInput) {
+        return input.contains(containInput);
+    }
 }
