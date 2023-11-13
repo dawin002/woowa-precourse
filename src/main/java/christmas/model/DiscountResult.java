@@ -1,11 +1,15 @@
 package christmas.model;
 
 public class DiscountResult {
-    private String discountName;
-    private int totalDiscount;
+    private String name;
+    private int price;
 
-    public DiscountResult(String discountName, int totalDiscount) {
-        this.discountName = discountName;
-        this.totalDiscount = totalDiscount;
+    public DiscountResult(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return this.price;
     }
 }
