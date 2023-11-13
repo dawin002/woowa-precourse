@@ -64,4 +64,17 @@ public class Event {
                 || Calender.SATURDAY.isMatch(date);
     }
 
+    public EventResult getSpecialDiscount() {
+        if (!eventApplicable || !isSpecial()) {
+            return null;
+        }
+        String eventName = EventInfo.SPECIAL.getName();
+        int totalDiscount = EventInfo.SPECIAL.getPrice();
+        return new EventResult(eventName, totalDiscount);
+    }
+
+    private boolean isSpecial() {
+        return Calender.SUNDAY.isMatch(date) || date == 25;
+    }
+
 }
