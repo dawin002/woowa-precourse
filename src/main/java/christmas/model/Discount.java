@@ -2,14 +2,14 @@ package christmas.model;
 
 public class Discount {
     private String name;
-    private int price;
+    private int amount;
 
-    public Discount(String name, int price) {
+    public Discount(String name, int amount) {
         this.name = name;
-        this.price = price;
+        this.amount = amount;
     }
 
-    public int getPrice() {
-        return this.price;
+    public int getAmount() {
+        return this.amount;
     }
 }

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiscountService {
-    private final List<Discount> discounts;
-    private int totalDiscountPrice;
+    private final List<Discount> discountDetails;
+    private int totalDiscountAmount;
 
     public DiscountService(int date, OrderService orderService) {
-        this.discounts = new ArrayList<>();
+        this.discountDetails = new ArrayList<>();
         addDiscounts(date, orderService);
-        this.totalDiscountPrice = setTotalDiscountPrice();
+        this.totalDiscountAmount = setTotalDiscountAmount();
     }
 
     public void addDiscounts(int date, OrderService orderService) {
@@ -34,7 +34,7 @@ public class DiscountService {
         if (isChristmasDDay(date)) {
             String discountName = DiscountInfo.CHRISTMAS_DDAY.getName();
             int totalDiscount = DiscountInfo.CHRISTMAS_DDAY.getPrice() * (date - 1) + 1000;
-            discounts.add(new Discount(discountName, totalDiscount));
+            discountDetails.add(new Discount(discountName, totalDiscount));
         }
     }
 
@@ -43,7 +43,7 @@ public class DiscountService {
             String discountName = DiscountInfo.WEEK_DAY.getName();
             int discountQuantity = orderService.countQuantityOfType(DiscountInfo.WEEK_DAY.getType());
             int totalDiscount = DiscountInfo.WEEK_DAY.getPrice() * discountQuantity;
-            discounts.add(new Discount(discountName, totalDiscount));
+            discountDetails.add(new Discount(discountName, totalDiscount));
         }
     }
 
@@ -52,7 +52,7 @@ public class DiscountService {
             String discountName = DiscountInfo.WEEK_END.getName();
             int discountQuantity = orderService.countQuantityOfType(DiscountInfo.WEEK_END.getType());
             int totalDiscount = DiscountInfo.WEEK_END.getPrice() * discountQuantity;
-            discounts.add(new Discount(discountName, totalDiscount));
+            discountDetails.add(new Discount(discountName, totalDiscount));
         }
     }
 
@@ -60,7 +60,7 @@ public class DiscountService {
         if (isSpecial(date)) {
             String discountName = DiscountInfo.SPECIAL.getName();
             int totalDiscount = DiscountInfo.SPECIAL.getPrice();
-            discounts.add(new Discount(discountName, totalDiscount));
+            discountDetails.add(new Discount(discountName, totalDiscount));
         }
     }
 
@@ -85,16 +85,16 @@ public class DiscountService {
         return Calender.SUNDAY.isMatch(date) || date == 25;
     }
 
-    private int setTotalDiscountPrice() {
-        int totalDiscount = 0;
-        for (Discount discount : discounts) {
-            totalDiscount += discount.getPrice();
+    private int setTotalDiscountAmount() {
+        int totalAmount = 0;
+        for (Discount discount : discountDetails) {
+            totalAmount += discount.getAmount();
         }
-        return totalDiscount;
+        return totalAmount;
     }
 
-    public int getTotalDiscountPrice() {
-        return totalDiscountPrice;
+    public int getTotalDiscountAmount() {
+        return totalDiscountAmount;
     }
 
 }
