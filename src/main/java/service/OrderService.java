@@ -1,11 +1,13 @@
-package christmas.model;
+package service;
+
+import christmas.model.Order;
 
 import java.util.List;
 
-public class Orders {
+public class OrderService {
     private List<Order> orders;
 
-    public Orders(List<Order> orders) {
+    public OrderService(List<Order> orders) {
         this.orders = orders;
     }
 
