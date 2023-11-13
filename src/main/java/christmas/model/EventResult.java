@@ -4,21 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventResult {
-    private List<DiscountResult> discountResults;
+    private List<Discount> discounts;
 
     public EventResult() {
-        discountResults = new ArrayList<>();
+        discounts = new ArrayList<>();
     }
 
-    public void addDiscount(DiscountResult discount) {
-        discountResults.add(discount);
+    public void addDiscount(Discount discount) {
+        discounts.add(discount);
     }
 
     public int getTotalDiscount() {
         int totalDiscount = 0;
-        for (DiscountResult discount : discountResults) {
+        for (Discount discount : discounts) {
             totalDiscount += discount.getPrice();
         }
         return totalDiscount;
     }
+
+
 }
