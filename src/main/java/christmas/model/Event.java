@@ -49,4 +49,19 @@ public class Event {
                 || Calender.THURSDAY.isMatch(date);
     }
 
+    public EventResult getWeekEndDiscount() {
+        if (!eventApplicable || !isWeekEnd()) {
+            return null;
+        }
+        String eventName = EventInfo.WEEK_END.getName();
+        int discountQuantity = orders.countQuantityOfType(EventInfo.WEEK_END.getType());
+        int totalDiscount = EventInfo.WEEK_END.getPrice() * discountQuantity;
+        return new EventResult(eventName, totalDiscount);
+    }
+
+    private boolean isWeekEnd() {
+        return Calender.FRIDAY.isMatch(date)
+                || Calender.SATURDAY.isMatch(date);
+    }
+
 }
