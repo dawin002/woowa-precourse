@@ -1,16 +1,17 @@
-package christmas.model;
+package service;
 
+import christmas.model.DiscountResult;
 import christmas.model.enums.Calender;
 import christmas.model.enums.DiscountInfo;
 
-public class Discount {
+public class DiscountService {
     private int date;
-    private Orders orders;
+    private OrderService orderService;
     private boolean discountApplicable;
 
-    public Discount(int date, Orders orders, int totalPrice) {
+    public DiscountService(int date, OrderService orderService, int totalPrice) {
         this.date = date;
-        this.orders = orders;
+        this.orderService = orderService;
         this.discountApplicable = isDiscountApplicable(totalPrice);
     }
 
@@ -36,7 +37,7 @@ public class Discount {
             return null;
         }
         String discountName = DiscountInfo.WEEK_DAY.getName();
-        int discountQuantity = orders.countQuantityOfType(DiscountInfo.WEEK_DAY.getType());
+        int discountQuantity = orderService.countQuantityOfType(DiscountInfo.WEEK_DAY.getType());
         int totalDiscount = DiscountInfo.WEEK_DAY.getPrice() * discountQuantity;
         return new DiscountResult(discountName, totalDiscount);
     }
@@ -54,7 +55,7 @@ public class Discount {
             return null;
         }
         String discountName = DiscountInfo.WEEK_END.getName();
-        int discountQuantity = orders.countQuantityOfType(DiscountInfo.WEEK_END.getType());
+        int discountQuantity = orderService.countQuantityOfType(DiscountInfo.WEEK_END.getType());
         int totalDiscount = DiscountInfo.WEEK_END.getPrice() * discountQuantity;
         return new DiscountResult(discountName, totalDiscount);
     }
