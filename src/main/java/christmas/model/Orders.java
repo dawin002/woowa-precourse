@@ -18,4 +18,13 @@ public class Orders {
     }
 
 
+    public int countQuantityOfType(String type) {
+        int quantityOfType = 0;
+        for (Order order : orders) {
+            if (order.isTypeMatch(type)) {
+                quantityOfType += order.getQuantity();
+            }
+        }
+        return quantityOfType;
+    }
 }
