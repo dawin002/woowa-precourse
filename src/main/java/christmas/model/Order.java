@@ -42,5 +42,9 @@ public class Order {
     public int getTotalPrice() {
         return this.quantity * this.price;
     }
+
+    public boolean isTypeMatch(String type) {
+        return this.type.equals(type);
+    }
 }
 
