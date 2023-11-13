@@ -9,6 +9,10 @@ public class Discount {
         this.amount = amount;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public int getAmount() {
         return this.amount;
     }
