@@ -97,4 +97,16 @@ public class DiscountService {
         return totalDiscountAmount;
     }
 
+    public int getDiscountDetailsSize() {
+        return discountDetails.size();
+    }
+
+    public String getDiscountNameAt(int index) {
+        return discountDetails.get(index).getName();
+    }
+
+    public int getDiscountAmountAt(int index) {
+        return discountDetails.get(index).getAmount();
+    }
+
 }
