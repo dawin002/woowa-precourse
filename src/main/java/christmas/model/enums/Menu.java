@@ -47,4 +47,8 @@ public enum Menu {
         Menu menu = getMenuByName(name);
         return menu.price;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
