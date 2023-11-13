@@ -18,17 +18,11 @@ public enum BadgeInfo {
         this.amountRangeEnd = amountRangeEnd;
     }
 
-    private static BadgeInfo getBadgeByAmount(int amount) {
-        for (BadgeInfo badge : BadgeInfo.values()) {
-            if (amount >= badge.amountRangeStart && amount < badge.amountRangeEnd) {
-                return badge;
-            }
-        }
-        throw new IllegalStateException("Cant find Badge by amount");
+    public boolean isAmountInRange(int amount) {
+        return amount >= this.amountRangeStart && amount < this.amountRangeEnd;
     }
 
-    public static String getNameByAmount(int amount) {
-        BadgeInfo badge = getBadgeByAmount(amount);
-        return badge.name;
+    public String getName() {
+        return this.name;
     }
 }
