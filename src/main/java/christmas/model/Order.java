@@ -5,15 +5,11 @@ import christmas.model.enums.Menu;
 public class Order {
     private String name;
     private int quantity;
-    private String type;
-    private int price;
 
     public Order(String name, int quantity) {
         validateOrder(name, quantity);
         this.name = name;
         this.quantity = quantity;
-        this.type = Menu.getTypeByName(name);
-        this.price = Menu.getPriceByName(name);
     }
 
     public void validateOrder(String name, int quantity) {
@@ -27,24 +23,8 @@ public class Order {
         return this.name;
     }
 
-    public String getType() {
-        return this.type;
-    }
-
     public int getQuantity() {
         return this.quantity;
-    }
-
-    public int getPrice() {
-        return this.price;
-    }
-
-    public int getTotalPrice() {
-        return this.quantity * this.price;
-    }
-
-    public boolean isTypeMatch(String type) {
-        return this.type.equals(type);
     }
 }
 
