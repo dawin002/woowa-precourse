@@ -74,6 +74,7 @@ public class EventPlaner {
     }
 
     private void printResultStart(Date date) {
+        outputView.printStartResult(date.getDate());
     }
 
     private void printOrders(Orders orders) {
