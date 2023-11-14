@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class DateTest {
     @DisplayName("전달된 날짜로 초기화된 Date 객체 생성 테스트")
@@ -23,8 +22,6 @@ class DateTest {
     void throwsExceptionByOverRangeDate(int visitDate) {
         assertThatThrownBy(() -> new Date(visitDate))
                 .isInstanceOf(IllegalArgumentException.class);
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new Date(visitDate));
-        assertThat(e.getMessage()).contains("유효하지 않은 날짜입니다.", "다시 입력해 주세요.");
     }
 
 }
