@@ -86,6 +86,8 @@ public class EventPlaner {
     }
 
     private void printGiftMenu(GiftMenu giftMenu) {
+
+        outputView.printGiftMenu(giftMenu.getGiftMenu());
     }
 
     private void printDiscountDetails(DiscountDetails discountDetails) {

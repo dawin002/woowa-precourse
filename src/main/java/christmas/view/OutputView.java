@@ -38,4 +38,16 @@ public class OutputView {
         String result = "\n<할인 전 총주문 금액>\n" + String.format("%,d원", totalPrice);
         System.out.println(result);
     }
+
+    public void printGiftMenu(HashMap<String, Integer> giftMenu) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n<증정 메뉴>\n");
+        for (String menu : giftMenu.keySet()) {
+            stringBuilder.append(menu).append(" ").append(giftMenu.get(menu)).append("개\n");
+        }
+        if (giftMenu.isEmpty()) {
+            stringBuilder.append("없음\n");
+        }
+
+    }
 }
