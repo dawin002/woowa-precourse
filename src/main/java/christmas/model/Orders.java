@@ -73,7 +73,7 @@ public class Orders {
         int totalPrice = 0;
         for (Order order : orders) {
             String name = order.getName();
-            totalPrice += Menu.getPriceByName(name);
+            totalPrice += Menu.getPriceByName(name) * order.getQuantity();
         }
         return totalPrice;
     }
