@@ -1,28 +1,25 @@
 package christmas.model;
 
+import christmas.utils.InputParser;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class Orders {
-    private List<Order> orders;
+    private final List<Order> orders;
 
     public Orders(List<String> inputOrders) {
         orders = new ArrayList<>();
         for (String inputOrder : inputOrders) {
-            Order newOrder = initOrder(inputOrder);
+            String menu = InputParser.getMenu(inputOrder);
+            int quantity = InputParser.getQuantity(inputOrder);
+            Order newOrder = new Order(menu, quantity);
             orders.add(newOrder);
         }
         validateDuplicate();
         validateOnlyDrink();
         validateTotalQuantity();
-    }
-
-    private Order initOrder(String inputOrder) {
-        String[] splitOrder = inputOrder.split("-");
-        String menu = splitOrder[0];
-        int quantity = Integer.parseInt(splitOrder[1]);
-        return new Order(menu, quantity);
     }
 
     private void validateDuplicate() {
