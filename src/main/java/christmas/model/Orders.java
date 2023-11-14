@@ -4,6 +4,7 @@ import christmas.model.enums.Menu;
 import christmas.utils.InputParser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -58,8 +59,14 @@ public class Orders {
         }
     }
 
-    public List<Order> getOrders() {
-        return this.orders;
+    public HashMap<String, Integer> getOrders() {
+        HashMap<String, Integer> orderResults = new HashMap<>();
+        for (Order order : orders) {
+            String menu = order.getName();
+            int quantity = order.getQuantity();
+            orderResults.put(menu, quantity);
+        }
+        return orderResults;
     }
 
     public int getTotalPrice() {
