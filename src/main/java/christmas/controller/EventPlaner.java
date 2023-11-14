@@ -104,5 +104,6 @@ public class EventPlaner {
     }
 
     private void printEventBadge(Badge badge) {
+        outputView.printEventBadge(badge.getName());
     }
 }

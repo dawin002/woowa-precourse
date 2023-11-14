@@ -76,4 +76,9 @@ public class OutputView {
         String result = "\n<할인 후 예상 결제 금액>\n" + String.format("%,d원", totalPrice);
         System.out.println(result);
     }
+
+    public void printEventBadge(String name) {
+        String result = "\n<12월 이벤트 배지>\n" + name;
+        System.out.println(result);
+    }
 }
