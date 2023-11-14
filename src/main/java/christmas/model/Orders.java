@@ -1,5 +1,6 @@
 package christmas.model;
 
+import christmas.model.enums.Menu;
 import christmas.utils.InputParser;
 
 import java.util.ArrayList;
@@ -38,7 +39,9 @@ public class Orders {
     private void validateOnlyDrink() {
         HashSet<String> types = new HashSet<>();
         for (Order order : orders) {
-            types.add(order.getType());
+            String name = order.getName();
+            String type = Menu.getTypeByName(name);
+            types.add(type);
         }
         if (types.size() == 1 && types.contains("drink")) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
@@ -57,5 +60,25 @@ public class Orders {
 
     public List<Order> getOrders() {
         return this.orders;
+    }
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (Order order : orders) {
+            String name = order.getName();
+            totalPrice += Menu.getPriceByName(name);
+        }
+        return totalPrice;
+    }
+
+    public int countQuantityOfType(String type) {
+        int quantityOfType = 0;
+        for (Order order : orders) {
+            String name = order.getName();
+            if (Menu.getTypeByName(name).equals(type)) {
+                quantityOfType += order.getQuantity();
+            }
+        }
+        return quantityOfType;
     }
 }
