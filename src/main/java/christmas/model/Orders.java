@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class OrdersGenerator {
+public class Orders {
     private List<Order> orders;
 
-    public OrdersGenerator(List<String> inputOrders) {
+    public Orders(List<String> inputOrders) {
         orders = new ArrayList<>();
         for (String inputOrder : inputOrders) {
             Order newOrder = initOrder(inputOrder);
