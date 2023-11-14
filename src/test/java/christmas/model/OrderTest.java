@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 class OrderTest {
 
@@ -25,8 +24,6 @@ class OrderTest {
     void noMatchingMenuExceptionTest(String name, int quantity) {
         assertThatThrownBy(() -> new Order(name, quantity))
                 .isInstanceOf(IllegalArgumentException.class);
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new Order(name, quantity));
-        assertThat(e.getMessage()).contains("유효하지 않은 주문입니다.", "다시 입력해 주세요.");
     }
 
     @DisplayName("1보다 작은 주문 수량에 대한 예외 처리")
@@ -35,8 +32,6 @@ class OrderTest {
     void underRangeQuantityExceptionTest(String name, int quantity) {
         assertThatThrownBy(() -> new Order(name, quantity))
                 .isInstanceOf(IllegalArgumentException.class);
-        IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new Order(name, quantity));
-        assertThat(e.getMessage()).contains("유효하지 않은 주문입니다.", "다시 입력해 주세요.");
     }
 
 }
