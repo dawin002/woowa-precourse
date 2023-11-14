@@ -78,6 +78,7 @@ public class EventPlaner {
     }
 
     private void printOrders(Orders orders) {
+        outputView.printOrders(orders.getOrderResults());
     }
 
     private void printTotalPrice(Orders orders) {

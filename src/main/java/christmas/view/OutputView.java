@@ -1,5 +1,7 @@
 package christmas.view;
 
+import java.util.HashMap;
+
 public class OutputView {
     public OutputView() {
     }
@@ -21,5 +23,14 @@ public class OutputView {
     }
     public void printError(String errorMessage) {
         System.out.println(errorMessage);
+    }
+
+    public void printOrders(HashMap<String, Integer> orderResults) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n<주문 메뉴>\n");
+        for (String menu : orderResults.keySet()) {
+            stringBuilder.append(menu).append(" ").append(orderResults.get(menu)).append("개\n");
+        }
+        System.out.println(stringBuilder);
     }
 }
