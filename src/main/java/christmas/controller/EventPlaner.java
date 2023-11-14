@@ -1,8 +1,6 @@
 package christmas.controller;
 
-import christmas.model.Date;
-import christmas.model.OrdersGenerator;
-import christmas.model.Orders;
+import christmas.model.*;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -15,35 +13,84 @@ public class EventPlaner {
         this.inputView = inputView;
     }
 
-    public void run() {
+    public void startPlaner() {
+        printPlanerStart();
         Date date = initDate();
         Orders orders = initOrders();
-        printTotalPrice(orders);
-    }
 
-    private void printTotalPrice(Orders orders) {
-        int totalPrice = orders.getTotalPrice();
-        System.out.println(totalPrice);
+        GiftMenu giftMenu = initGiftMenu(orders);
+        DiscountService discountService = initDiscountService(orders);
+        DiscountDetails discountDetails = discountService.calculateDiscounts(date, orders);
+        Badge badge = initBadge(orders);
+
+        printResultStart(date);
+        printOrders(orders);
+        printTotalPrice(orders);
+        printGiftMenu(giftMenu);
+        printDiscountDetails(discountDetails);
+        printTotalPriceAfterDiscount(orders, discountDetails);
+        printEventBadge(badge);
     }
 
     private Date initDate() {
-        try {
-            outputView.printReadDate();
-            return new Date(inputView.readDate());
-        } catch (IllegalArgumentException e) {
-            outputView.printError(e.getMessage());
+        while (true) {
+            try {
+                outputView.printReadDate();
+                return new Date(inputView.readDate());
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
         }
-        return initDate();
     }
 
     private Orders initOrders() {
-        try {
-            outputView.printReadOrder();
-            OrdersGenerator generator = new OrdersGenerator(inputView.readOrder());
-            return new Orders(generator.getOrders());
-        } catch (IllegalArgumentException e) {
-            outputView.printError(e.getMessage());
+        while (true) {
+            try {
+                outputView.printReadOrder();
+                return new Orders(inputView.readOrder());
+            } catch (IllegalArgumentException e) {
+                outputView.printError(e.getMessage());
+            }
         }
-        return initOrders();
+    }
+
+    private GiftMenu initGiftMenu(Orders orders) {
+        int totalPrice = orders.getTotalPrice();
+        return new GiftMenu(totalPrice);
+    }
+
+    private DiscountService initDiscountService(Orders orders) {
+        int totalPrice = orders.getTotalPrice();
+        return new DiscountService(totalPrice);
+    }
+
+    private Badge initBadge(Orders orders) {
+        int totalPrice = orders.getTotalPrice();
+        return new Badge(totalPrice);
+    }
+
+    private void printPlanerStart() {
+        outputView.printStartMessage();
+    }
+
+    private void printResultStart(Date date) {
+    }
+
+    private void printOrders(Orders orders) {
+    }
+
+    private void printTotalPrice(Orders orders) {
+    }
+
+    private void printGiftMenu(GiftMenu giftMenu) {
+    }
+
+    private void printDiscountDetails(DiscountDetails discountDetails) {
+    }
+
+    private void printTotalPriceAfterDiscount(Orders orders, DiscountDetails discountDetails) {
+    }
+
+    private void printEventBadge(Badge badge) {
     }
 }
