@@ -2,6 +2,8 @@ package christmas.model;
 
 import christmas.model.enums.Menu;
 
+import java.util.HashMap;
+
 public class GiftMenu {
     private String name;
     private int quantity;
@@ -27,11 +29,11 @@ public class GiftMenu {
         this.quantity = 1;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getQuantity() {
-        return quantity;
+    public HashMap<String, Integer> getGiftMenu() {
+        HashMap<String, Integer> gifts = new HashMap<>();
+        if (name != null) {
+            gifts.put(name, quantity);
+        }
+        return gifts;
     }
 }
