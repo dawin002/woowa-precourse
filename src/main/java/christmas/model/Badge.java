@@ -6,14 +6,16 @@ public class Badge {
     private String name;
 
     public Badge(int discountAmount) {
-        this.name = null;
+        this.name = setBadge(discountAmount);
     }
-    public void setBadge(int discountAmount) {
+
+    public String setBadge(int discountAmount) {
         for (BadgeInfo badge : BadgeInfo.values()) {
             if (badge.isAmountInRange(discountAmount)) {
-                this.name = badge.getName();
+                return badge.getName();
             }
         }
+        return null;
     }
 
     public String getName() {
