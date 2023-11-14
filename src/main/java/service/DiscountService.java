@@ -1,67 +1,70 @@
 package service;
 
+import christmas.model.Date;
 import christmas.model.Discount;
+import christmas.model.DiscountDetails;
+import christmas.model.Orders;
 import christmas.model.enums.Calender;
 import christmas.model.enums.DiscountInfo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DiscountService {
-    private final List<Discount> discountDetails;
-    private int totalDiscountAmount;
-
-    public DiscountService(int date, OrderService orderService) {
-        this.discountDetails = new ArrayList<>();
-        addDiscounts(date, orderService);
-        this.totalDiscountAmount = setTotalDiscountAmount();
+    private final boolean discountApplicable;
+    public DiscountService(int totalPrice) {
+        this.discountApplicable = isDiscountApplicable(totalPrice);
     }
 
-    public void addDiscounts(int date, OrderService orderService) {
-        if (isDiscountApplicable(orderService)) {
-            checkChristmasDDayDiscount(date);
-            checkWeekDayDiscount(date, orderService);
-            checkWeekEndDiscount(date, orderService);
-            checkSpecialDiscount(date);
+    public DiscountDetails calculateDiscounts(Date date, Orders orders) {
+        DiscountDetails discountDetails = new DiscountDetails();
+        int visitDate = date.getDate();
+        if(discountApplicable) {
+            discountDetails.addDiscount(getChristmasDDayDiscount(visitDate));
+            discountDetails.addDiscount(getWeekDayDiscount(visitDate, orders));
+            discountDetails.addDiscount(getWeekEndDiscount(visitDate, orders));
+            discountDetails.addDiscount(getSpecialDiscount(visitDate));
         }
+        return discountDetails;
     }
 
-    private boolean isDiscountApplicable(OrderService orderService) {
-        return orderService.getTotalPrice() >= 10000;
+    private boolean isDiscountApplicable(int totalPrice) {
+        return totalPrice >= 10000;
     }
 
-    public void checkChristmasDDayDiscount(int date) {
+    private Discount getChristmasDDayDiscount(int date) {
         if (isChristmasDDay(date)) {
             String discountName = DiscountInfo.CHRISTMAS_DDAY.getName();
             int totalDiscount = DiscountInfo.CHRISTMAS_DDAY.getPrice() * (date - 1) + 1000;
-            discountDetails.add(new Discount(discountName, totalDiscount));
+            return new Discount(discountName, totalDiscount);
         }
+        return null;
     }
 
-    public void checkWeekDayDiscount(int date, OrderService orderService) {
+    private Discount getWeekDayDiscount(int date, Orders orders) {
         if (isWeekDay(date)) {
             String discountName = DiscountInfo.WEEK_DAY.getName();
-            int discountQuantity = orderService.countQuantityOfType(DiscountInfo.WEEK_DAY.getType());
+            int discountQuantity = orders.countQuantityOfType(DiscountInfo.WEEK_DAY.getType());
             int totalDiscount = DiscountInfo.WEEK_DAY.getPrice() * discountQuantity;
-            discountDetails.add(new Discount(discountName, totalDiscount));
+            return new Discount(discountName, totalDiscount);
         }
+        return null;
     }
 
-    public void checkWeekEndDiscount(int date, OrderService orderService) {
+    private Discount getWeekEndDiscount(int date, Orders orders) {
         if (isWeekEnd(date)) {
             String discountName = DiscountInfo.WEEK_END.getName();
-            int discountQuantity = orderService.countQuantityOfType(DiscountInfo.WEEK_END.getType());
+            int discountQuantity = orders.countQuantityOfType(DiscountInfo.WEEK_END.getType());
             int totalDiscount = DiscountInfo.WEEK_END.getPrice() * discountQuantity;
-            discountDetails.add(new Discount(discountName, totalDiscount));
+            return new Discount(discountName, totalDiscount);
         }
+        return null;
     }
 
-    public void checkSpecialDiscount(int date) {
+    private Discount getSpecialDiscount(int date) {
         if (isSpecial(date)) {
             String discountName = DiscountInfo.SPECIAL.getName();
             int totalDiscount = DiscountInfo.SPECIAL.getPrice();
-            discountDetails.add(new Discount(discountName, totalDiscount));
+            return new Discount(discountName, totalDiscount);
         }
+        return null;
     }
 
     private boolean isChristmasDDay(int date) {
@@ -82,31 +85,7 @@ public class DiscountService {
     }
 
     private boolean isSpecial(int date) {
-        return Calender.SUNDAY.isMatch(date) || date == 25;
+        return Calender.SUNDAY.isMatch(date)
+                || date == 25;
     }
-
-    private int setTotalDiscountAmount() {
-        int totalAmount = 0;
-        for (Discount discount : discountDetails) {
-            totalAmount += discount.getAmount();
-        }
-        return totalAmount;
-    }
-
-    public int getTotalDiscountAmount() {
-        return totalDiscountAmount;
-    }
-
-    public int getDiscountDetailsSize() {
-        return discountDetails.size();
-    }
-
-    public String getDiscountNameAt(int index) {
-        return discountDetails.get(index).getName();
-    }
-
-    public int getDiscountAmountAt(int index) {
-        return discountDetails.get(index).getAmount();
-    }
-
 }
