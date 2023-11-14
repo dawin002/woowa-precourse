@@ -36,4 +36,8 @@ public class GiftMenu {
         }
         return gifts;
     }
+
+    public String getGiftName() {
+        return this.name;
+    }
 }
