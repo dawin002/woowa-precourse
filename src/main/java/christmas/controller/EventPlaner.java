@@ -25,7 +25,7 @@ public class EventPlaner {
 
         printResultStart(date);
         printOrders(orders);
-        printTotalPrice(orders);
+        printTotalPriceBeforeDiscount(orders);
         printGiftMenu(giftMenu);
         printDiscountDetails(discountDetails);
         printTotalPriceAfterDiscount(orders, discountDetails);
@@ -81,7 +81,8 @@ public class EventPlaner {
         outputView.printOrders(orders.getOrderResults());
     }
 
-    private void printTotalPrice(Orders orders) {
+    private void printTotalPriceBeforeDiscount(Orders orders) {
+        outputView.printTotalPriceBeforeDiscount(orders.getTotalPrice());
     }
 
     private void printGiftMenu(GiftMenu giftMenu) {

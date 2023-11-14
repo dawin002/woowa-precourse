@@ -33,4 +33,9 @@ public class OutputView {
         }
         System.out.println(stringBuilder);
     }
+
+    public void printTotalPriceBeforeDiscount(int totalPrice) {
+        String result = "\n<할인 전 총주문 금액>\n" + String.format("%,d원", totalPrice);
+        System.out.println(result);
+    }
 }
