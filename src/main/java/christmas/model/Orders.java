@@ -59,7 +59,7 @@ public class Orders {
         }
     }
 
-    public HashMap<String, Integer> getOrders() {
+    public HashMap<String, Integer> getOrderResults() {
         HashMap<String, Integer> orderResults = new HashMap<>();
         for (Order order : orders) {
             String menu = order.getName();
