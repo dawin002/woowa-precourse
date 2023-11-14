@@ -94,6 +94,8 @@ public class EventPlaner {
     }
 
     private void printTotalPriceAfterDiscount(Orders orders, DiscountDetails discountDetails) {
+        int totalPriceAfterDiscount = orders.getTotalPrice() - discountDetails.getTotalDiscountAmount();
+        outputView.printTotalPriceAfterDiscount(totalPriceAfterDiscount);
     }
 
     private void printEventBadge(Badge badge) {
