@@ -1,5 +1,7 @@
 package christmas.model;
 
+import christmas.model.enums.DiscountInfo;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +33,17 @@ public class DiscountDetails {
         int totalAmount = 0;
         for (Discount discount : discounts) {
             totalAmount += discount.getAmount();
+        }
+        return totalAmount;
+    }
+
+    public int getTotalDiscountAmountWithoutGift() {
+        int totalAmount = 0;
+        String giftEvent = DiscountInfo.GIFT_EVENT.getName();
+        for (Discount discount : discounts) {
+            if(!discount.getName().equals(giftEvent)) {
+                totalAmount += discount.getAmount();
+            }
         }
         return totalAmount;
     }
