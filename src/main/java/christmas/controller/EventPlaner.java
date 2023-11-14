@@ -28,6 +28,7 @@ public class EventPlaner {
         printTotalPriceBeforeDiscount(orders);
         printGiftMenu(giftMenu);
         printDiscountDetails(discountDetails);
+        printTotalDiscountAmount(discountDetails);
         printTotalPriceAfterDiscount(orders, discountDetails);
         printEventBadge(badge);
     }
@@ -91,6 +92,10 @@ public class EventPlaner {
 
     private void printDiscountDetails(DiscountDetails discountDetails) {
         outputView.printDiscountDetails(discountDetails.getDetails());
+    }
+
+    private void printTotalDiscountAmount(DiscountDetails discountDetails) {
+        outputView.printTotalDiscountAmount(discountDetails.getTotalDiscountAmount());
     }
 
     private void printTotalPriceAfterDiscount(Orders orders, DiscountDetails discountDetails) {

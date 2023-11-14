@@ -66,8 +66,14 @@ public class OutputView {
         System.out.print(stringBuilder);
     }
 
+    public void printTotalDiscountAmount(int totalAmount) {
+        totalAmount = -totalAmount;
+        String result = "\n<총혜택 금액>\n" + String.format("%,d원", totalAmount);
+        System.out.println(result);
+    }
+
     public void printTotalPriceAfterDiscount(int totalPrice) {
-        String result = "\n<<총혜택 금액>>\n" + String.format("%,d원", totalPrice);
+        String result = "\n<할인 후 예상 결제 금액>\n" + String.format("%,d원", totalPrice);
         System.out.println(result);
     }
 }
