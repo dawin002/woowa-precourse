@@ -1,4 +1,4 @@
-package service;
+package christmas.model;
 
 import christmas.model.Date;
 import christmas.model.Discount;
