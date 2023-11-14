@@ -6,15 +6,10 @@ import christmas.validations.InputValidator;
 import java.util.List;
 
 public class InputView {
-    private InputValidator inputValidator;
-
-    public InputView(InputValidator inputValidator) {
-        this.inputValidator = inputValidator;
-    }
 
     public int readDate() {
         String input = Console.readLine();
-        inputValidator.validateDate(input);
+        InputValidator.validateDate(input);
         return Integer.parseInt(input);
     }
 
@@ -22,9 +17,9 @@ public class InputView {
         String input = Console.readLine();
         List<String> orders = makeInputToList(input);
         for (String order : orders) {
-            inputValidator.validateOrder(order);
-            inputValidator.validateMenu(getMenuName(order));
-            inputValidator.validateQuantity(getMenuQuantity(order));
+            InputValidator.validateOrder(order);
+            InputValidator.validateMenu(getMenuName(order));
+            InputValidator.validateQuantity(getMenuQuantity(order));
         }
         return orders;
     }

@@ -1,34 +1,34 @@
 package christmas.validations;
 
 public class InputValidator {
-    public void validateDate(String date) {
+    public static void validateDate(String date) {
         if (date.isBlank()
                 || isNotNumber(date)) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
         }
     }
 
-    public void validateOrder(String order) {
+    public static void validateOrder(String order) {
         if (order.isBlank()
                 || !order.contains("-")) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
-    public void validateMenu(String menu) {
+    public static void validateMenu(String menu) {
         if (menu.isBlank()) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
-    public void validateQuantity(String quantity) {
+    public static void validateQuantity(String quantity) {
         if (quantity.isBlank()
                 || isNotNumber(quantity)) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
-    private boolean isNotNumber(String input) {
+    private static boolean isNotNumber(String input) {
         for (char number : input.toCharArray()) {
             if ((int) number < (int) '0' || (int) number > (int) '9') {
                 return true;
