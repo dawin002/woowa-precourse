@@ -19,10 +19,8 @@ public class OutputView {
     }
 
     public void printStartResult(int visitDate) {
-        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", visitDate);
-    }
-    public void printError(String errorMessage) {
-        System.out.println(errorMessage);
+        String result = "12월 " + visitDate + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
+        System.out.println(result);
     }
 
     public void printOrders(HashMap<String, Integer> orderResults) {
@@ -32,7 +30,7 @@ public class OutputView {
             int quantity = orderResults.get(menu);
             stringBuilder.append(menu).append(" ").append(quantity).append("개\n");
         }
-        System.out.println(stringBuilder);
+        System.out.print(stringBuilder);
     }
 
     public void printTotalPriceBeforeDiscount(int totalPrice) {
@@ -55,7 +53,7 @@ public class OutputView {
 
     public void printDiscountDetails(HashMap<String, Integer> discountDetails) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n<증정 메뉴>\n");
+        stringBuilder.append("\n<혜택 내역>\n");
         for (String discountName : discountDetails.keySet()) {
             String amount = String.format("-%,d원\n", discountDetails.get(discountName));
             stringBuilder.append(discountName).append(": ").append(amount);
@@ -80,5 +78,9 @@ public class OutputView {
     public void printEventBadge(String name) {
         String result = "\n<12월 이벤트 배지>\n" + name;
         System.out.println(result);
+    }
+
+    public void printError(String errorMessage) {
+        System.out.println(errorMessage);
     }
 }
