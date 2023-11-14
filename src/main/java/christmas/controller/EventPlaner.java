@@ -86,11 +86,11 @@ public class EventPlaner {
     }
 
     private void printGiftMenu(GiftMenu giftMenu) {
-
         outputView.printGiftMenu(giftMenu.getGiftMenu());
     }
 
     private void printDiscountDetails(DiscountDetails discountDetails) {
+        outputView.printDiscountDetails(discountDetails.getDetails());
     }
 
     private void printTotalPriceAfterDiscount(Orders orders, DiscountDetails discountDetails) {

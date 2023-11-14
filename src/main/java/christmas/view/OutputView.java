@@ -29,7 +29,8 @@ public class OutputView {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n<주문 메뉴>\n");
         for (String menu : orderResults.keySet()) {
-            stringBuilder.append(menu).append(" ").append(orderResults.get(menu)).append("개\n");
+            int quantity = orderResults.get(menu);
+            stringBuilder.append(menu).append(" ").append(quantity).append("개\n");
         }
         System.out.println(stringBuilder);
     }
@@ -43,11 +44,25 @@ public class OutputView {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n<증정 메뉴>\n");
         for (String menu : giftMenu.keySet()) {
-            stringBuilder.append(menu).append(" ").append(giftMenu.get(menu)).append("개\n");
+            int quantity = giftMenu.get(menu);
+            stringBuilder.append(menu).append(" ").append(quantity).append("개\n");
         }
         if (giftMenu.isEmpty()) {
             stringBuilder.append("없음\n");
         }
+        System.out.print(stringBuilder);
+    }
 
+    public void printDiscountDetails(HashMap<String, Integer> discountDetails) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n<증정 메뉴>\n");
+        for (String discountName : discountDetails.keySet()) {
+            String amount = String.format("-%,d원\n", discountDetails.get(discountName));
+            stringBuilder.append(discountName).append(": ").append(amount);
+        }
+        if (discountDetails.isEmpty()) {
+            stringBuilder.append("없음\n");
+        }
+        System.out.print(stringBuilder);
     }
 }
