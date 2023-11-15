@@ -1,11 +1,11 @@
 package christmas.view;
 
 import christmas.dto.DiscountResult;
+import christmas.dto.GiftResult;
 import christmas.dto.OrderResult;
 import christmas.model.Discount;
+import christmas.model.Gift;
 import christmas.model.Order;
-
-import java.util.HashMap;
 
 public class OutputView {
     public void printStartMessage() {
@@ -42,14 +42,16 @@ public class OutputView {
         System.out.println(result);
     }
 
-    public void printGiftMenu(HashMap<String, Integer> giftMenu) {
+    public void printGiftMenu(GiftResult giftResult) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n<증정 메뉴>\n");
-        for (String menu : giftMenu.keySet()) {
-            int quantity = giftMenu.get(menu);
-            stringBuilder.append(menu).append(" ").append(quantity).append("개\n");
+        for (Gift gift : giftResult.getGifts()) {
+            stringBuilder.append(gift.getName())
+                    .append(" ")
+                    .append(gift.getQuantity())
+                    .append("개\n");
         }
-        if (giftMenu.isEmpty()) {
+        if (giftResult.getGifts().isEmpty()) {
             stringBuilder.append("없음\n");
         }
         System.out.print(stringBuilder);
