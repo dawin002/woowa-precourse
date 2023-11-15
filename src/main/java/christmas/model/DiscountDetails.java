@@ -3,11 +3,10 @@ package christmas.model;
 import christmas.model.enums.DiscountInfo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class DiscountDetails {
-    private List<Discount> discounts;
+    private final List<Discount> discounts;
 
     public DiscountDetails() {
         this.discounts = new ArrayList<>();
@@ -19,14 +18,8 @@ public class DiscountDetails {
         }
     }
 
-    public HashMap<String, Integer> getDetails() {
-        HashMap<String, Integer> discountResult = new HashMap<>();
-        for (Discount discount : discounts) {
-            String discountName = discount.getName();
-            int discountAmount = discount.getAmount();
-            discountResult.put(discountName, discountAmount);
-        }
-        return discountResult;
+    public List<Discount> getDetails() {
+        return discounts;
     }
 
     public int getTotalDiscountAmount() {
