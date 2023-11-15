@@ -2,23 +2,22 @@ package christmas.model;
 
 import christmas.model.enums.Calender;
 import christmas.model.enums.DiscountInfo;
-import christmas.model.enums.Menu;
 
 public class DiscountService {
-    private final boolean discountApplicable;
+    private final boolean isApplicable;
     public DiscountService(int totalPrice) {
-        this.discountApplicable = isDiscountApplicable(totalPrice);
+        this.isApplicable = isDiscountApplicable(totalPrice);
     }
 
-    public DiscountDetails calculateDiscounts(Date date, Orders orders, GiftMenu gift) {
+    public DiscountDetails calculateDiscounts(Date date, Orders orders, Gifts gifts) {
         DiscountDetails discountDetails = new DiscountDetails();
         int visitDate = date.getDate();
-        if(discountApplicable) {
+        if(isApplicable) {
             discountDetails.addDiscount(getChristmasDDayDiscount(visitDate));
             discountDetails.addDiscount(getWeekDayDiscount(visitDate, orders));
             discountDetails.addDiscount(getWeekEndDiscount(visitDate, orders));
             discountDetails.addDiscount(getSpecialDiscount(visitDate));
-            discountDetails.addDiscount(getGiftDiscount(gift));
+            discountDetails.addDiscount(getGiftDiscount(gifts));
         }
         return discountDetails;
     }
@@ -65,11 +64,10 @@ public class DiscountService {
         return null;
     }
 
-    private Discount getGiftDiscount(GiftMenu gift) {
-        if (isGiftDiscount(gift)) {
+    private Discount getGiftDiscount(Gifts gifts) {
+        if (isGiftDiscount(gifts)) {
             String discountName = DiscountInfo.GIFT_EVENT.getName();
-            String giftName = gift.getGiftName();
-            int discountAmount = Menu.getPriceByName(giftName);
+            int discountAmount = gifts.getTotalPrice();
             return new Discount(discountName, discountAmount);
         }
         return null;
@@ -97,7 +95,7 @@ public class DiscountService {
                 || date == 25;
     }
 
-    private boolean isGiftDiscount(GiftMenu gift) {
-        return gift.getGiftMenu() != null;
+    private boolean isGiftDiscount(Gifts gifts) {
+        return gifts.getGiftCount() != 0;
     }
 }
