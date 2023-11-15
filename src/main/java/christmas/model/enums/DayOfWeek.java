@@ -2,7 +2,7 @@ package christmas.model.enums;
 
 import java.util.List;
 
-public enum Calender {
+public enum DayOfWeek {
     SUNDAY(List.of(3, 10, 17, 24, 31)),
     MONDAY(List.of(4, 11, 18, 25)),
     TUESDAY(List.of(5, 12, 19, 26)),
@@ -13,11 +13,16 @@ public enum Calender {
 
     private final List<Integer> dates;
 
-    Calender(List<Integer> dates) {
+    DayOfWeek(List<Integer> dates) {
         this.dates = dates;
     }
 
-    public boolean isMatch(int date) {
-        return this.dates.contains(date);
+    public static DayOfWeek getDayByDate(int date) {
+        for (DayOfWeek day : DayOfWeek.values()) {
+            if (day.dates.contains(date)) {
+                return day;
+            }
+        }
+        return null;
     }
 }
