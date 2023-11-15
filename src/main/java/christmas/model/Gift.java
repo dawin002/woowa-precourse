@@ -4,11 +4,11 @@ import christmas.model.enums.Menu;
 
 import java.util.HashMap;
 
-public class GiftMenu {
+public class Gift {
     private String name;
     private int quantity;
 
-    public GiftMenu(int totalPrice) {
+    public Gift(int totalPrice) {
         this.name = null;
         this.quantity = 0;
         setPresent(totalPrice);
@@ -39,5 +39,9 @@ public class GiftMenu {
 
     public String getGiftName() {
         return this.name;
+    }
+
+    public int getQuantity() {
+        return this.quantity;
     }
 }
