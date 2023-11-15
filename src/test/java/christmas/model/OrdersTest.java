@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -19,19 +18,26 @@ class OrdersTest {
     @DisplayName("주문 관리 생성 및 초기화 테스트")
     @Test
     void ordersInitializeTest() {
-        List<String> inputOrder = List.of("타파스-2","제로콜라-3","바비큐립-1");
+        List<String> inputOrder = List.of("타파스-2", "제로콜라-3", "바비큐립-1");
         Orders orders = new Orders(inputOrder);
-        assertThat(orders.getOrderResults().size()).isEqualTo(3);
-        assertThat(orders.getOrderResults().keySet()).contains("타파스", "제로콜라", "바비큐립");
-        assertThat(orders.getOrderResults().get("타파스")).isEqualTo(2);
-        assertThat(orders.getOrderResults().get("제로콜라")).isEqualTo(3);
-        assertThat(orders.getOrderResults().get("바비큐립")).isEqualTo(1);
+        assertThat(orders.getOrders().size()).isEqualTo(3);
+        for (Order order : orders.getOrders()) {
+            if (order.getName().equals("타파스")) {
+                assertThat(order.getQuantity()).isEqualTo(2);
+            }
+            if (order.getName().equals("제로콜라")) {
+                assertThat(order.getQuantity()).isEqualTo(3);
+            }
+            if (order.getName().equals("바비큐립")) {
+                assertThat(order.getQuantity()).isEqualTo(1);
+            }
+        }
     }
 
     @DisplayName("중복된 메뉴에 대한 예외 처리 테스트")
     @Test
     void throwsDuplicatedMenuExceptionTest() {
-        List<String> inputOrder = List.of("타파스-2","제로콜라-3","타파스-1");
+        List<String> inputOrder = List.of("타파스-2", "제로콜라-3", "타파스-1");
         assertThatThrownBy(() -> new Orders(inputOrder))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -39,7 +45,7 @@ class OrdersTest {
     @DisplayName("음료 메뉴로만 이루어진 주문에 대한 예외 처리 테스트")
     @Test
     void throwsOnlyDrinkMenuExceptionTest() {
-        List<String> inputOrder = List.of("제로콜라-2","레드와인-3");
+        List<String> inputOrder = List.of("제로콜라-2", "레드와인-3");
         assertThatThrownBy(() -> new Orders(inputOrder))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -47,7 +53,7 @@ class OrdersTest {
     @DisplayName("20개 초과의 총주문 수량에 대한 예외 처리 테스트")
     @Test
     void throwsOverRangeTotalQuantityExceptionTest() {
-        List<String> inputOrder = List.of("타파스-20","제로콜라-1");
+        List<String> inputOrder = List.of("타파스-20", "제로콜라-1");
         assertThatThrownBy(() -> new Orders(inputOrder))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -55,14 +61,25 @@ class OrdersTest {
     @DisplayName("주문 내역 반환 기능의 반환값 테스트")
     @Test
     void getOrderResultTest() {
-        List<String> inputOrder = List.of("타파스-1","제로콜라-2","레드와인-3","바비큐립-4");
+        List<String> inputOrder = List.of("타파스-1", "제로콜라-2", "레드와인-3", "바비큐립-4");
         Orders orders = new Orders(inputOrder);
-        assertThat(orders.getOrderResults()).isInstanceOf(HashMap.class);
-        assertThat(orders.getOrderResults().size()).isEqualTo(4);
-        assertThat(orders.getOrderResults().get("타파스")).isEqualTo(1);
-        assertThat(orders.getOrderResults().get("제로콜라")).isEqualTo(2);
-        assertThat(orders.getOrderResults().get("레드와인")).isEqualTo(3);
-        assertThat(orders.getOrderResults().get("바비큐립")).isEqualTo(4);
+        assertThat(orders.getOrders()).isInstanceOf(List.class);
+        assertThat(orders.getOrders().size()).isEqualTo(4);
+
+        for (Order order : orders.getOrders()) {
+            if (order.getName().equals("타파스")) {
+                assertThat(order.getQuantity()).isEqualTo(1);
+            }
+            if (order.getName().equals("제로콜라")) {
+                assertThat(order.getQuantity()).isEqualTo(2);
+            }
+            if (order.getName().equals("레드와인")) {
+                assertThat(order.getQuantity()).isEqualTo(3);
+            }
+            if (order.getName().equals("바비큐립")) {
+                assertThat(order.getQuantity()).isEqualTo(4);
+            }
+        }
     }
 
     @DisplayName("총주문 금액 계산 기능 테스트")
@@ -77,7 +94,7 @@ class OrdersTest {
     @DisplayName("타입별 주문 수량 계산 테스트")
     @Test
     void countTypeQuantityTest() {
-        List<String> inputOrder = List.of("타파스-1","티본스테이크-2","초코케이크-3","샴페인-4");
+        List<String> inputOrder = List.of("타파스-1", "티본스테이크-2", "초코케이크-3", "샴페인-4");
         Orders orders = new Orders(inputOrder);
         assertThat(orders.countQuantityOfType("appetizer")).isEqualTo(1);
         assertThat(orders.countQuantityOfType("main")).isEqualTo(2);
