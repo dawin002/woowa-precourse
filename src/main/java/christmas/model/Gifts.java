@@ -15,21 +15,21 @@ public class Gifts {
         checkGifts(totalPrice);
     }
 
-    private boolean getApplicable(int totalPrice) {
-        return totalPrice >= 10000;
-    }
-
     private void checkGifts(int totalPrice) {
         if (isApplicable) {
             checkChampagne(totalPrice);
         }
     }
 
+    private boolean getApplicable(int totalPrice) {
+        return totalPrice >= 10000;
+    }
+
     private void checkChampagne(int totalPrice) {
         if (totalPrice >= 120000) {
             String giftName = Menu.CHAMPAGNE.getName();
-            int giftPrice = Menu.getPriceByName(giftName);
-            Gift newGift = new Gift(giftName, giftPrice);
+            int giftQuantity = 1;
+            Gift newGift = new Gift(giftName, giftQuantity);
             gifts.add(newGift);
         }
     }
