@@ -31,11 +31,10 @@ public class DiscountDetails {
     }
 
     public int getTotalDiscountAmountWithoutGift() {
-        int totalAmount = 0;
-        String giftEvent = DiscountInfo.GIFT_EVENT.getName();
+        int totalAmount = getTotalDiscountAmount();
         for (Discount discount : discounts) {
-            if(!discount.getName().equals(giftEvent)) {
-                totalAmount += discount.getAmount();
+            if(discount.getName().equals(DiscountInfo.GIFT_EVENT.getName())) {
+                totalAmount -= discount.getAmount();
             }
         }
         return totalAmount;
