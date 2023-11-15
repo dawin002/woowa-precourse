@@ -41,4 +41,13 @@ public class Gifts {
     public List<Gift> getGifts() {
         return gifts;
     }
+
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (Gift gift : gifts) {
+            String giftName = gift.getName();
+            totalPrice += Menu.getPriceByName(giftName);
+        }
+        return totalPrice;
+    }
 }
