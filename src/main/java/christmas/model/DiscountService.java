@@ -1,6 +1,6 @@
 package christmas.model;
 
-import christmas.model.enums.Calender;
+import christmas.model.enums.DayOfWeek;
 import christmas.model.enums.DiscountInfo;
 
 public class DiscountService {
@@ -78,20 +78,22 @@ public class DiscountService {
     }
 
     private boolean isWeekDay(int date) {
-        return Calender.SUNDAY.isMatch(date)
-                || Calender.MONDAY.isMatch(date)
-                || Calender.TUESDAY.isMatch(date)
-                || Calender.WEDNESDAY.isMatch(date)
-                || Calender.THURSDAY.isMatch(date);
+        DayOfWeek day = DayOfWeek.getDayByDate(date);
+        return DayOfWeek.SUNDAY == day
+                || DayOfWeek.MONDAY == day
+                || DayOfWeek.TUESDAY == day
+                || DayOfWeek.WEDNESDAY == day
+                || DayOfWeek.THURSDAY == day;
     }
 
     private boolean isWeekEnd(int date) {
-        return Calender.FRIDAY.isMatch(date)
-                || Calender.SATURDAY.isMatch(date);
+        DayOfWeek day = DayOfWeek.getDayByDate(date);
+        return DayOfWeek.FRIDAY == day
+                || DayOfWeek.SATURDAY == day;
     }
 
     private boolean isSpecial(int date) {
-        return Calender.SUNDAY.isMatch(date)
+        return DayOfWeek.SUNDAY == DayOfWeek.getDayByDate(date)
                 || date == 25;
     }
 
