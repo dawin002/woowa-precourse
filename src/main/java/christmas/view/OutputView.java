@@ -1,5 +1,9 @@
 package christmas.view;
 
+import christmas.dto.DiscountResult;
+import christmas.dto.OrderResult;
+import christmas.model.Discount;
+
 import java.util.HashMap;
 
 public class OutputView {
@@ -23,7 +27,7 @@ public class OutputView {
         System.out.println(result);
     }
 
-    public void printOrders(HashMap<String, Integer> orderResults) {
+    public void printOrders(OrderResult orderResults) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n<주문 메뉴>\n");
         for (String menu : orderResults.keySet()) {
@@ -51,14 +55,16 @@ public class OutputView {
         System.out.print(stringBuilder);
     }
 
-    public void printDiscountDetails(HashMap<String, Integer> discountDetails) {
+    public void printDiscountDetails(DiscountResult discountResult) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n<혜택 내역>\n");
-        for (String discountName : discountDetails.keySet()) {
-            String amount = String.format("-%,d원\n", discountDetails.get(discountName));
-            stringBuilder.append(discountName).append(": ").append(amount);
+        for (Discount discount : discountResult.getDiscounts()) {
+            stringBuilder.append(discount.getName())
+                    .append(": ")
+                    .append(String.format("-%,d", discount.getAmount()))
+                    .append("원\n");
         }
-        if (discountDetails.isEmpty()) {
+        if (discountResult.getDiscounts().isEmpty()) {
             stringBuilder.append("없음\n");
         }
         System.out.print(stringBuilder);
