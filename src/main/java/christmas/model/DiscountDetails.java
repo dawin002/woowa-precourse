@@ -33,7 +33,7 @@ public class DiscountDetails {
     public int getTotalDiscountAmountWithoutGift() {
         int totalAmount = getTotalDiscountAmount();
         for (Discount discount : discounts) {
-            if(discount.getName().equals(DiscountInfo.GIFT_EVENT.getName())) {
+            if (discount.getName().equals(DiscountInfo.GIFT_EVENT.getName())) {
                 totalAmount -= discount.getAmount();
             }
         }

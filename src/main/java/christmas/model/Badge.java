@@ -3,7 +3,7 @@ package christmas.model;
 import christmas.model.enums.BadgeInfo;
 
 public class Badge {
-    private String name;
+    private final String name;
 
     public Badge(int discountAmount) {
         this.name = setBadge(discountAmount);

@@ -1,7 +1,7 @@
 package christmas.model;
 
 public class Date {
-    private int date;
+    private final int date;
 
     public Date(int date) {
         validateDate(date);

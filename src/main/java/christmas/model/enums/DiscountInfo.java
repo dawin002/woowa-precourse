@@ -6,9 +6,9 @@ public enum DiscountInfo {
     WEEK_END("주말 할인", "main", 2023),
     SPECIAL("스페셜 할인", "once", 1000),
     GIFT_EVENT("증정 이벤트", "gift", 0);
-    private String name;
-    private String type;
-    private int price;
+    private final String name;
+    private final String type;
+    private final int price;
 
     DiscountInfo(String name, String type, int price) {
         this.name = name;

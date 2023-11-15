@@ -3,8 +3,8 @@ package christmas.model;
 import christmas.model.enums.Menu;
 
 public class Gift {
-    private String name;
-    private int quantity;
+    private final String name;
+    private final int quantity;
 
     public Gift(String name, int quantity) {
         this.name = name;

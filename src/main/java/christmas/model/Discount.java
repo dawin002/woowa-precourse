@@ -1,8 +1,8 @@
 package christmas.model;
 
 public class Discount {
-    private String name;
-    private int amount;
+    private final String name;
+    private final int amount;
 
     public Discount(String name, int amount) {
         this.name = name;

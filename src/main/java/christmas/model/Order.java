@@ -3,8 +3,8 @@ package christmas.model;
 import christmas.model.enums.Menu;
 
 public class Order {
-    private String name;
-    private int quantity;
+    private final String name;
+    private final int quantity;
 
     public Order(String name, int quantity) {
         validateOrder(name, quantity);

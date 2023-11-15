@@ -10,7 +10,7 @@ public class DiscountService {
     public DiscountDetails calculateDiscounts(Date date, Orders orders, Gifts gifts) {
         DiscountDetails discountDetails = new DiscountDetails();
         int visitDate = date.getDate();
-        if(isDiscountApplicable(orders.getTotalPrice())) {
+        if (isDiscountApplicable(orders.getTotalPrice())) {
             checkChristmasDDayDiscount(discountDetails, visitDate);
             checkWeekDayDiscount(discountDetails, visitDate, orders);
             checkWeekEndDiscount(discountDetails, visitDate, orders);

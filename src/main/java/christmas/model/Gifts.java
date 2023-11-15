@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Gifts {
-    private List<Gift> gifts;
-    private boolean isApplicable;
+    private final List<Gift> gifts;
+    private final boolean isApplicable;
 
     public Gifts(int totalPrice) {
         this.gifts = new ArrayList<>();
