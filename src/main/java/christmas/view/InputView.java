@@ -6,6 +6,10 @@ import christmas.validations.InputValidator;
 import java.util.List;
 
 public class InputView {
+    private final static String INPUT_SEPARATOR = ",";
+    private final static String ORDER_SEPARATOR = "-";
+    private final static int MENU_NAME_INDEX = 0;
+    private final static int MENU_QUANTITY_INDEX = 1;
 
     public int readDate() {
         String input = Console.readLine();
@@ -25,17 +29,17 @@ public class InputView {
     }
 
     private List<String> makeInputToList(String input) {
-        String[] splitInput = input.split(",");
+        String[] splitInput = input.split(INPUT_SEPARATOR);
         return List.of(splitInput);
     }
 
     private String getMenuName(String order) {
-        String[] splitOrder = order.split("-");
-        return splitOrder[0];
+        String[] splitOrder = order.split(ORDER_SEPARATOR);
+        return splitOrder[MENU_NAME_INDEX];
     }
 
     private String getMenuQuantity(String order) {
-        String[] splitOrder = order.split("-");
-        return splitOrder[1];
+        String[] splitOrder = order.split(ORDER_SEPARATOR);
+        return splitOrder[MENU_QUANTITY_INDEX];
     }
 }

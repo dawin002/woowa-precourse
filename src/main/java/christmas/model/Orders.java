@@ -8,6 +8,12 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Orders {
+    private final static int JUST_SINGLE_TYPE = 1;
+    private final static String DRINK_TYPE = "drink";
+    private final static int MAX_ORDER_QUANTITY = 20;
+    private final static String ERROR_DUPLICATED_MENU_NAME = "Order has duplicated menu.";
+    private final static String ERROR_ONLY_DRINK_TYPE = "Can not order only drink menu.";
+    private final static String ERROR_OVER_MAX_QUANTITY = "Order quantity overed max quantity(20).";
     private final List<Order> orders;
 
     public Orders(List<String> inputOrders) {
@@ -32,7 +38,7 @@ public class Orders {
             nonDuplicateNames.add(name);
         }
         if (names.size() != nonDuplicateNames.size()) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(ERROR_DUPLICATED_MENU_NAME);
         }
     }
 
@@ -43,8 +49,8 @@ public class Orders {
             String type = Menu.getTypeByName(name);
             types.add(type);
         }
-        if (types.size() == 1 && types.contains("drink")) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        if (types.size() == JUST_SINGLE_TYPE && types.contains(DRINK_TYPE)) {
+            throw new IllegalArgumentException(ERROR_ONLY_DRINK_TYPE);
         }
     }
 
@@ -53,8 +59,8 @@ public class Orders {
         for (Order order : orders) {
             totalQuantity += order.getQuantity();
         }
-        if (totalQuantity > 20) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        if (totalQuantity > MAX_ORDER_QUANTITY) {
+            throw new IllegalArgumentException(ERROR_OVER_MAX_QUANTITY);
         }
     }
 

@@ -3,6 +3,7 @@ package christmas.model;
 import christmas.model.enums.BadgeInfo;
 
 public class Badge {
+    private final static String ERROR_NULL_NAME = "Badge name is null.(Call setBadge() function first)";
     private final String name;
 
     public Badge(int discountAmount) {
@@ -17,6 +18,6 @@ public class Badge {
         if (this.name != null) {
             return this.name;
         }
-        throw new IllegalStateException("Badge name is null.(Call setBadge() function first)");
+        throw new IllegalStateException(ERROR_NULL_NAME);
     }
 }

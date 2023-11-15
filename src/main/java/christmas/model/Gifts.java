@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Gifts {
+    private final static int EVENT_APPLICABLE_MIN_PRICE = 10000;
+    private final static int GIFT_GET_CHAMPAGNE_PRICE = 120000;
+    private final static int GIFT_CHAMPAGNE_QUANTITY = 1;
     private final List<Gift> gifts;
     private final boolean isApplicable;
 
@@ -22,14 +25,13 @@ public class Gifts {
     }
 
     private boolean getApplicable(int totalPrice) {
-        return totalPrice >= 10000;
+        return totalPrice >= EVENT_APPLICABLE_MIN_PRICE;
     }
 
     private void checkChampagne(int totalPrice) {
-        if (totalPrice >= 120000) {
+        if (totalPrice >= GIFT_GET_CHAMPAGNE_PRICE) {
             String giftName = Menu.CHAMPAGNE.getName();
-            int giftQuantity = 1;
-            Gift newGift = new Gift(giftName, giftQuantity);
+            Gift newGift = new Gift(giftName, GIFT_CHAMPAGNE_QUANTITY);
             gifts.add(newGift);
         }
     }

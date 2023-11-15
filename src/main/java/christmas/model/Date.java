@@ -1,6 +1,9 @@
 package christmas.model;
 
 public class Date {
+    private final static int DATE_RANGE_START = 1;
+    private final static int DATE_RANGE_END = 31;
+    private final static String ERROR_OUT_RANGE_DATE = "Input date is out of range.";
     private final int date;
 
     public Date(int date) {
@@ -9,8 +12,8 @@ public class Date {
     }
 
     private void validateDate(int date) {
-        if (date < 1 || date > 31) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+        if (date < DATE_RANGE_START || date > DATE_RANGE_END) {
+            throw new IllegalArgumentException(ERROR_OUT_RANGE_DATE);
         }
     }
 

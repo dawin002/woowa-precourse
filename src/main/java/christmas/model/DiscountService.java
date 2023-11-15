@@ -4,8 +4,12 @@ import christmas.model.enums.DayOfWeek;
 import christmas.model.enums.DiscountInfo;
 
 public class DiscountService {
-    public DiscountService() {
-    }
+    private final static int DISCOUNT_APPLICABLE_MIN_PRICE = 10000;
+    private final static int CHRISTMAS_D_DAY_DEFAULT_AMOUNT = 900;
+    private final static int CHRISTMAS_D_DAY_START_DATE = 1;
+    private final static int CHRISTMAS_D_DAY_END_DATE = 25;
+    private final static int SPECIAL_DATE = 25;
+    private final static int QUANTITY_ZERO = 0;
 
     public DiscountDetails calculateDiscounts(Date date, Orders orders, Gifts gifts) {
         DiscountDetails discountDetails = new DiscountDetails();
@@ -21,31 +25,31 @@ public class DiscountService {
     }
 
     private boolean isDiscountApplicable(int totalPrice) {
-        return totalPrice >= 10000;
+        return totalPrice >= DISCOUNT_APPLICABLE_MIN_PRICE;
     }
 
     private void checkChristmasDDayDiscount(DiscountDetails discountDetails, int date) {
         if (isChristmasDDay(date)) {
             String discountName = DiscountInfo.CHRISTMAS_DDAY.getName();
-            int discountAmount = DiscountInfo.CHRISTMAS_DDAY.getAmount() * (date - 1) + 1000;
+            int discountAmount = DiscountInfo.CHRISTMAS_DDAY.getAmount() * date + CHRISTMAS_D_DAY_DEFAULT_AMOUNT;
             discountDetails.addDiscount(new Discount(discountName, discountAmount));
         }
     }
 
     private void checkWeekDayDiscount(DiscountDetails discountDetails, int date, Orders orders) {
-        int discountQuantity = orders.countQuantityOfType(DiscountInfo.WEEK_DAY.getType());
-        if (isWeekDay(date) && discountQuantity != 0) {
+        int discountTypeQuantity = orders.countQuantityOfType(DiscountInfo.WEEK_DAY.getType());
+        if (isWeekDay(date) && isQuantityNotZero(discountTypeQuantity)) {
             String discountName = DiscountInfo.WEEK_DAY.getName();
-            int discountAmount = DiscountInfo.WEEK_DAY.getAmount() * discountQuantity;
+            int discountAmount = DiscountInfo.WEEK_DAY.getAmount() * discountTypeQuantity;
             discountDetails.addDiscount(new Discount(discountName, discountAmount));
         }
     }
 
     private void checkWeekEndDiscount(DiscountDetails discountDetails, int date, Orders orders) {
-        int discountQuantity = orders.countQuantityOfType(DiscountInfo.WEEK_END.getType());
-        if (isWeekEnd(date) && discountQuantity != 0) {
+        int discountTypeQuantity = orders.countQuantityOfType(DiscountInfo.WEEK_END.getType());
+        if (isWeekEnd(date) && isQuantityNotZero(discountTypeQuantity)) {
             String discountName = DiscountInfo.WEEK_END.getName();
-            int discountAmount = DiscountInfo.WEEK_END.getAmount() * discountQuantity;
+            int discountAmount = DiscountInfo.WEEK_END.getAmount() * discountTypeQuantity;
             discountDetails.addDiscount(new Discount(discountName, discountAmount));
         }
     }
@@ -67,7 +71,7 @@ public class DiscountService {
     }
 
     private boolean isChristmasDDay(int date) {
-        return date >= 1 && date <= 25;
+        return date >= CHRISTMAS_D_DAY_START_DATE && date <= CHRISTMAS_D_DAY_END_DATE;
     }
 
     private boolean isWeekDay(int date) {
@@ -87,10 +91,14 @@ public class DiscountService {
 
     private boolean isSpecial(int date) {
         return DayOfWeek.SUNDAY == DayOfWeek.getDayByDate(date)
-                || date == 25;
+                || date == SPECIAL_DATE;
     }
 
     private boolean isGiftDiscount(Gifts gifts) {
-        return gifts.getGiftCount() != 0;
+        return gifts.getGiftCount() != QUANTITY_ZERO;
+    }
+
+    private boolean isQuantityNotZero(int discountTypeQuantity) {
+        return discountTypeQuantity != QUANTITY_ZERO;
     }
 }

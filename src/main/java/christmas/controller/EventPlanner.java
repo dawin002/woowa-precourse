@@ -8,6 +8,8 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class EventPlanner {
+    private final static String ORDER_ERROR_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요. ";
+    private final static String DATE_ERROR_MESSAGE = "유효하지 않은 날짜입니다. 다시 입력해 주세요. ";
     private final OutputView outputView;
     private final InputView inputView;
     private final DiscountService discountService;
@@ -40,7 +42,7 @@ public class EventPlanner {
                 outputView.printReadDate();
                 return new Date(inputView.readDate());
             } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
+                outputView.printError(DATE_ERROR_MESSAGE + e.getMessage());
             }
         }
     }
@@ -51,7 +53,7 @@ public class EventPlanner {
                 outputView.printReadOrder();
                 return new Orders(inputView.readOrder());
             } catch (IllegalArgumentException e) {
-                outputView.printError(e.getMessage());
+                outputView.printError(ORDER_ERROR_MESSAGE + e.getMessage());
             }
         }
     }
