@@ -3,13 +3,11 @@ package christmas.view;
 import christmas.dto.DiscountResult;
 import christmas.dto.OrderResult;
 import christmas.model.Discount;
+import christmas.model.Order;
 
 import java.util.HashMap;
 
 public class OutputView {
-    public OutputView() {
-    }
-
     public void printStartMessage() {
         System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
     }
@@ -30,9 +28,11 @@ public class OutputView {
     public void printOrders(OrderResult orderResults) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n<주문 메뉴>\n");
-        for (String menu : orderResults.keySet()) {
-            int quantity = orderResults.get(menu);
-            stringBuilder.append(menu).append(" ").append(quantity).append("개\n");
+        for (Order order : orderResults.getOrders()) {
+            stringBuilder.append(order.getName())
+                    .append(" ")
+                    .append(order.getQuantity())
+                    .append("개\n");
         }
         System.out.print(stringBuilder);
     }
