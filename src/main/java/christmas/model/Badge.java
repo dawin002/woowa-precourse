@@ -9,19 +9,14 @@ public class Badge {
         this.name = setBadge(discountAmount);
     }
 
-    public String setBadge(int discountAmount) {
-        for (BadgeInfo badge : BadgeInfo.values()) {
-            if (badge.isAmountInRange(discountAmount)) {
-                return badge.getName();
-            }
-        }
-        return null;
+    private String setBadge(int discountAmount) {
+        return BadgeInfo.getNameByAmount(discountAmount);
     }
 
     public String getName() {
         if (this.name != null) {
             return this.name;
         }
-        throw new IllegalStateException("Badge name is null(call setBadge() function first).");
+        throw new IllegalStateException("Badge name is null.(Call setBadge() function first)");
     }
 }

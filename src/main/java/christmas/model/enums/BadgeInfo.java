@@ -1,7 +1,5 @@
 package christmas.model.enums;
 
-import christmas.model.Badge;
-
 public enum BadgeInfo {
     NONE("없음", 0, 5000),
     STAR("별", 5000, 10000),
@@ -18,8 +16,13 @@ public enum BadgeInfo {
         this.amountRangeEnd = amountRangeEnd;
     }
 
-    public boolean isAmountInRange(int amount) {
-        return amount >= this.amountRangeStart && amount < this.amountRangeEnd;
+    public static String getNameByAmount(int amount) {
+        for (BadgeInfo badge : BadgeInfo.values()) {
+            if (amount >= badge.amountRangeStart && amount < badge.amountRangeEnd) {
+                return badge.name;
+            }
+        }
+        return null;
     }
 
     public String getName() {
